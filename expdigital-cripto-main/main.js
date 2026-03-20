@@ -2,6 +2,7 @@ import { setCodificado, getEntrada, getEntradaCodificado, setSaidaDecodificado }
 import cifrarAtbash from "./cifrarAtbash.js";
 import cifrarCesar from "./cifrarCesar.js";
 import { cifrarVinagere, DECODIFICAR, CODIFICAR } from "./cifrarVinagere.js";
+import { codifica_esteg, decodifica_esteg } from "./esteg.js";
 
 document.getElementById("btnCifrar").onclick = () => {
     console.log("clicou btnCifrar");
@@ -41,3 +42,22 @@ document.getElementById("btnDecifrarVinagere").onclick = () => {
     let codigo = cifrarVinagere(entrada,chaveVinagere, DECODIFICAR)
     setSaidaDecodificado(codigo)
 } 
+
+document.getElementById("btnEsteg").onclick = () => {
+    console.log("clicou btnEsteg");
+
+    let mensagem = prompt("Digite a mensagem escondida:")
+    let texto = getEntrada()
+    let resp = codifica_esteg(texto,mensagem)
+    console.log(resp);
+    setCodificado(resp)
+} 
+
+document.getElementById("btnEstegDecode").onclick = () => {
+    console.log("clicou btnEstegDecode");
+
+    let texto = getEntradaCodificado()
+    console.log(texto);
+    let saida = decodifica_esteg(texto)
+    setSaidaDecodificado(saida)
+}
